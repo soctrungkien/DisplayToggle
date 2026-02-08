@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import io.github.ulysseszh.displaytoggle.Constants.ACTION_SET_DISPLAY_POWER_MODE
 import io.github.ulysseszh.displaytoggle.util.Display.PowerMode
+import io.github.ulysseszh.displaytoggle.ScreenController
 
 class SetDisplayPowerModeActivity : Activity() {
 
