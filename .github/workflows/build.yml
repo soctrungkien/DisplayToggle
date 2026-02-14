@@ -27,7 +27,8 @@ jobs:
 
       - name: Accept Android SDK Licenses
         run: |
-          yes | sdkmanager --licenses
+          yes | sdkmanager --licenses || true
+          sdkmanager --update
 
       - name: Build
         run: ./gradlew --no-daemon build
