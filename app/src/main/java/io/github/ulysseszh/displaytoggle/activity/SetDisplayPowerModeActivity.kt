@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import io.github.ulysseszh.displaytoggle.Constants.ACTION_SET_DISPLAY_POWER_MODE
 import io.github.ulysseszh.displaytoggle.util.Display.PowerMode
-// CHỈ GIỮ LẠI DÒNG IMPORT NÀY:
+// Dòng import quan trọng nhất:
 import io.github.ulysseszh.displaytoggle.ScreenController
 
 class SetDisplayPowerModeActivity : Activity() {
@@ -33,11 +33,15 @@ class SetDisplayPowerModeActivity : Activity() {
         }
 
         Thread {
-            // Sử dụng ScreenController (lớp đã import ở trên) để truy cập ON/OFF
-            val mode = if (intent.getBooleanExtra("on", true)) ScreenController.ON else ScreenController.OFF
+            // Sử dụng trực tiếp ScreenController.ON/OFF thông qua lớp đã import
+            val mode = if (intent.getBooleanExtra("on", true)) {
+                ScreenController.ON
+            } else {
+                ScreenController.OFF
+            }
             
-            // Lưu ý: Bạn nên thêm logic thực thi mode ở đây trước khi finish()
-            // Ví dụ: ScreenController.setDisplayPowerMode(mode) 
+            // Thực thi lệnh shell (giả sử ScreenController có hàm shell hoặc logic tương ứng)
+            // ScreenController.setDisplayPowerMode(mode)
             
             finish()
         }.start()
