@@ -33,19 +33,8 @@ jobs:
       - name: Build
         run: ./gradlew --no-daemon build
 
-      - name: Sign
-        run: |
-          build_tools="$(find "$ANDROID_HOME/build-tools" -maxdepth 1 -mindepth 1 -printf '%p\n' | sort -V | tail -n1)"
-          echo "${{ secrets.SIGNING_KEY_BASE64 }}" | base64 -d > signingKey.jks
-          "$build_tools/apksigner" sign \
-            --alignment-preserved \
-            --ks signingKey.jks \
-            --ks-key-alias "${{ secrets.ALIAS }}" \
-            --ks-pass "pass:${{ secrets.KEY_STORE_PASSWORD }}" \
-            --key-pass "pass:${{ secrets.KEY_PASSWORD }}" \
-            --out app-release.apk \
-            app/build/outputs/apk/release/app-release-unsigned.apk
-          rm signingKey.jks
+      - name: Copy APK
+        run: cp app/build/outputs/apk/release/app-release-unsigned.apk ./app-release.apk
 
       - name: Upload
         uses: actions/upload-artifact@v4
